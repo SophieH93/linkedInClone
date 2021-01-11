@@ -19,7 +19,9 @@ function Feed() {
     const [posts, setPosts] = useState([]);
     
     useEffect(() => {
-       db.collection("posts").orderBy("timestamp", "desc").onSnapshot((snapshot) => 
+       db.collection("posts")
+       .orderBy("timestamp", "desc")
+       .onSnapshot((snapshot) => 
            setPosts(
                snapshot.docs.map((doc) => ({
                     id: doc.id,
@@ -36,7 +38,7 @@ function Feed() {
             name: user.displayName,
             description: user.email,
             message: input,
-            photoUrl: user.photoUrl || "",
+            photoUrl: user.photoUrl || '',
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
         });
         setInput("");
@@ -48,7 +50,7 @@ function Feed() {
                 <div className="feed_input">
                     <CreateIcon />
                     <form>
-                        <input value={input} onChange={e => setInput(e.target.value)}  type="text" />
+                        <input value={input} onChange={e => setInput(e.target.value)} type="text" />
                         <button onClick={sendPost} type="submit">Send</button>                        
                     </form>
                 </div>
@@ -72,7 +74,6 @@ function Feed() {
                     />
                 ))}
             </FlipMove>
-
         </div>
     );
 }
